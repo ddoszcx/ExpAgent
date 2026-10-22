@@ -9,18 +9,22 @@
 ## 1. Роли участников
 
 ### 👤 Участник A — «Stats & Data Engineer» (Аналитик)
+
 **Профиль:** Сильная статистика, SQL, Python (pandas, scipy, numpy).
 **Зона ответственности:**
+
 - Все статистические инструменты (Tools).
 - Генератор синтетических данных и Trap Suite (20 ловушек).
 - SQL-шаблоны для извлечения user-level данных.
 - Юнит-тесты математической корректности.
 
 ### 👤 Участник B — «LLM & Infra Engineer» (Инженер)
+
 **Профиль:** Python, API, работа с LLM, базами данных, интерфейсами.
 **Зона ответственности:**
+
 - Харнесс агента (оркестрация, Tool Calling, системный промпт).
-- Коннекторы к базам данных (DuckDB, ClickHouse).
+- Коннекторы к базам данных (DuckDB, ClickHouse).Ppp
 - Streamlit-интерфейс (чат, дашборд аудита, SQL-лог).
 - Интеграционные тесты (агент + Tools + данные).
 
@@ -48,14 +52,15 @@
 
 ### Задачи:
 
-| # | Задача | Кто | Результат |
-|:--|:---|:--:|:---|
-| 0.1 | Создать репозиторий на GitHub, настроить `.gitignore`, `README.md` (заглушка), ветки `main` / `dev` | B | Готовый пустой репозиторий |
-| 0.2 | Создать структуру папок по спецификации (`tools/`, `harness/`, `db/`, `trap_suite/`, `tests/`) | B | Каркас директорий с `__init__.py` |
-| 0.3 | Составить `requirements.txt` | A+B | Зафиксированные версии зависимостей |
-| 0.4 | Настроить виртуальное окружение (venv / conda), убедиться, что всё ставится | A+B | Рабочее окружение у обоих участников |
+| #   | Задача                                                                                                                                          | Кто | Результат                                                   |
+| :-- | :---------------------------------------------------------------------------------------------------------------------------------------------------- | :----: | :------------------------------------------------------------------- |
+| 0.1 | Создать репозиторий на GitHub, настроить `.gitignore`, `README.md` (заглушка), ветки `main` / `dev` |   B   | Готовый пустой репозиторий                   |
+| 0.2 | Создать структуру папок по спецификации (`tools/`, `harness/`, `db/`, `trap_suite/`, `tests/`)           |   B   | Каркас директорий с `__init__.py`                 |
+| 0.3 | Составить `requirements.txt`                                                                                                               |  A+B  | Зафиксированные версии зависимостей |
+| 0.4 | Настроить виртуальное окружение (venv / conda), убедиться, что всё ставится                       |  A+B  | Рабочее окружение у обоих участников |
 
 ### Содержимое `requirements.txt`:
+
 ```
 # Статистика и данные
 numpy>=1.24
@@ -88,6 +93,7 @@ pytest>=7.4
 ---
 
 ### 📦 Задача 1.1: Генератор реалистичных user-level данных
+
 **Файл:** `db/synthetic_generator.py`
 **Срок:** 1 день
 **Исполнитель:** A
@@ -116,6 +122,7 @@ def generate_experiment(
 ```
 
 **Требования к реализму данных:**
+
 - Выручка: логнормальное распределение с тяжёлыми хвостами (`np.random.lognormal`).
 - Конверсии: бернуллиевское распределение с baseline ~3–8%.
 - Предпериод: коррелирует с тестовым периодом через копулу или линейную модель.
@@ -124,6 +131,7 @@ def generate_experiment(
 ---
 
 ### 📦 Задача 1.2: Tool — SRM Check
+
 **Файл:** `tools/srm.py`
 **Срок:** 0.5 дня
 **Исполнитель:** A
@@ -151,6 +159,7 @@ def srm_check(
 ---
 
 ### 📦 Задача 1.3: Tool — Pre-Experiment Power Analysis
+
 **Файл:** `tools/power_analysis.py`
 **Срок:** 0.5 дня
 **Исполнитель:** A
@@ -181,6 +190,7 @@ def pre_experiment_power(
 ---
 
 ### 📦 Задача 1.4: Tool — Frequentist Tests (Welch, Z-test, Fisher)
+
 **Файл:** `tools/frequentist_tests.py`
 **Срок:** 0.5 дня
 **Исполнитель:** A
@@ -207,6 +217,7 @@ def fisher_exact(
 ---
 
 ### 📦 Задача 1.5: Tool — Delta Method (Ratio-метрики)
+
 **Файл:** `tools/delta_method.py`
 **Срок:** 0.5 дня
 **Исполнитель:** A
@@ -242,6 +253,7 @@ def delta_method_ratio_test(
 ---
 
 ### 📦 Задача 1.6: Tool — CUPED (с проверкой предпосылок)
+
 **Файл:** `tools/cuped.py`
 **Срок:** 0.5 дня
 **Исполнитель:** A
@@ -270,12 +282,14 @@ def cuped_transform(
 ```
 
 **Проверки предпосылок:**
+
 - Если $|\rho| < 0.3$ → warning: «Слабая ковариата, CUPED даст минимальный эффект».
 - Если ковариата не сбалансирована между группами → warning: «Ковариата зависит от назначения».
 
 ---
 
 ### 📦 Задача 1.7: Tool — Bootstrap
+
 **Файл:** `tools/bootstrap.py`
 **Срок:** 0.5 дня
 **Исполнитель:** A
@@ -294,6 +308,7 @@ def bootstrap_mean_diff(
 ---
 
 ### 📦 Задача 1.8: Tool — Sequential Testing (mSPRT)
+
 **Файл:** `tools/sequential.py`
 **Срок:** 0.5 дня
 **Исполнитель:** A
@@ -314,6 +329,7 @@ def msprt_test(
 ---
 
 ### 📦 Задача 1.9: Tool — Multiple Testing Correction
+
 **Файл:** `tools/multiple_testing.py`
 **Срок:** 0.25 дня
 **Исполнитель:** A
@@ -329,6 +345,7 @@ def bonferroni(p_values: list[float], alpha: float = 0.05) -> dict:
 ---
 
 ### 📦 Задача 1.10: Tool — Winsorization + Revenue Calculator
+
 **Файл:** `tools/winsorization.py`, `tools/revenue_calculator.py`
 **Срок:** 0.25 дня
 **Исполнитель:** A
@@ -352,6 +369,7 @@ def effect_to_annual_revenue(
 ---
 
 ### 📦 Задача 1.11: Tool — Bayesian A/B
+
 **Файл:** `tools/bayesian.py`
 **Срок:** 0.5 дня
 **Исполнитель:** A
@@ -380,6 +398,7 @@ def bayesian_binary(
 ---
 
 ### 📦 Задача 2.1: Коннектор DuckDB (локальная демо-база)
+
 **Файл:** `db/duckdb_local.py`
 **Срок:** 0.5 дня
 **Исполнитель:** B
@@ -402,6 +421,7 @@ class DuckDBClient:
 ---
 
 ### 📦 Задача 2.2: Коннектор ClickHouse
+
 **Файл:** `db/clickhouse_client.py`
 **Срок:** 0.5 дня
 **Исполнитель:** B
@@ -424,6 +444,7 @@ class ClickHouseClient:
 ---
 
 ### 📦 Задача 2.3: Реестр инструментов (Tool Registry)
+
 **Файл:** `harness/tool_registry.py`
 **Срок:** 1 день
 **Исполнитель:** B
@@ -471,6 +492,7 @@ def execute_tool(name: str, arguments: dict) -> dict:
 ---
 
 ### 📦 Задача 2.4: Системный промпт (Parent Prompt)
+
 **Файл:** `harness/system_prompt.py`
 **Срок:** 1 день
 **Исполнитель:** B
@@ -478,6 +500,7 @@ def execute_tool(name: str, arguments: dict) -> dict:
 Содержимое — SOP из раздела 5 спецификации. Отдельная строковая константа `SYSTEM_PROMPT`, которая передаётся в `messages[0]` при вызове LLM.
 
 Включает:
+
 - Роль агента.
 - Протокол аудита (SRM → Power → CUPED → Test → Multiple Corrections → Verdict).
 - Список запретов (нет post-hoc power, нет арифметики в голове, нет MWU для средних).
@@ -486,6 +509,7 @@ def execute_tool(name: str, arguments: dict) -> dict:
 ---
 
 ### 📦 Задача 2.5: Agent Core (ReAct Loop)
+
 **Файл:** `harness/agent.py`
 **Срок:** 1.5 дня
 **Исполнитель:** B
@@ -515,6 +539,7 @@ class ExperimentAuditAgent:
 ```
 
 **Ключевые моменты реализации:**
+
 - Все сгенерированные SQL-запросы сохраняются в `audit_log`.
 - Каждый вызов Tool логируется с входными параметрами и результатом.
 - LLM вызывается через стандартный OpenAI `chat.completions.create` с `tools=TOOL_DEFINITIONS`.
@@ -530,40 +555,42 @@ class ExperimentAuditAgent:
 ---
 
 ### 📦 Задача 3.1: Trap Suite — 20 синтетических экспериментов
+
 **Папка:** `trap_suite/traps/`
 **Срок:** 2–3 дня
 **Исполнитель:** A
 
 Каждая ловушка — это отдельный файл с функцией `generate() -> dict`:
 
-| # | Файл | Ловушка | Правильный вердикт |
-|:--|:---|:---|:---|
-| 01 | `clean_win.py` | Чистая победа, всё корректно | `CLEAN_WIN` |
-| 02 | `peeking_false_win.py` | Тест остановлен на 3-й день при p=0.04 | `FALSE_WIN: PEEKING` |
-| 03 | `srm_broken.py` | Сплит 10000 vs 8700 | `INVALID: SRM_BROKEN` |
-| 04 | `ratio_no_delta.py` | revenue/orders без Delta Method | `FALSE_WIN: RATIO_NO_DELTA` |
-| 05 | `multiple_metrics_no_fdr.py` | 8 метрик, 1 "значима" | `FALSE_WIN: NO_FDR_CORRECTION` |
-| 06 | `underpowered_lucky.py` | N=500, MDE нужен 5%, "нашли" 12% | `UNRELIABLE: UNDERPOWERED` |
-| 07 | `outlier_driven.py` | Эффект держится на 3 китах | `UNRELIABLE: OUTLIER_DRIVEN` |
-| 08 | `cuped_bad_covariate.py` | CUPED с $\rho = 0.1$ | `WARNING: WEAK_CUPED` |
-| 09 | `mwu_for_revenue.py` | MWU для разницы средних чеков | `METHODOLOGICAL_ERROR` |
-| 10 | `clean_loss.py` | Чистый проигрыш, корректная статистика | `CLEAN_LOSS` |
-| 11 | `novelty_effect.py` | Эффект затухает к концу теста | `WARNING: NOVELTY_EFFECT` |
-| 12 | `simpsons_paradox.py` | Общий эффект +, но в каждом сегменте – | `WARNING: SIMPSONS_PARADOX` |
-| 13 | `contaminated_control.py` | Часть treatment-юзеров в control | `INVALID: CONTAMINATION` |
-| 14 | `bot_traffic.py` | 15% ботов раздули конверсию | `UNRELIABLE: BOT_TRAFFIC` |
-| 15 | `aa_false_positive.py` | A/A тест, который "нашёл" p=0.03 | `FALSE_WIN: AA_TEST` |
-| 16 | `three_variants_no_correction.py` | A/B/C, лучший выбран без поправки | `FALSE_WIN: NO_MULTIVAR_CORRECTION` |
-| 17 | `sequential_correct.py` | mSPRT ранняя остановка, всё ок | `CLEAN_WIN` |
-| 18 | `extreme_skew_revenue.py` | Логнормальная выручка, нужен bootstrap | `NEEDS_BOOTSTRAP` |
-| 19 | `cuped_correct_strong.py` | CUPED с $\rho = 0.7$, работает | `CLEAN_WIN` |
-| 20 | `mixed_issues.py` | SRM + ratio + 3 метрики | `INVALID: MULTIPLE_ISSUES` |
+| #  | Файл                            | Ловушка                                                           | Правильный вердикт   |
+| :- | :---------------------------------- | :----------------------------------------------------------------------- | :------------------------------------ |
+| 01 | `clean_win.py`                    | Чистая победа, всё корректно                     | `CLEAN_WIN`                         |
+| 02 | `peeking_false_win.py`            | Тест остановлен на 3-й день при p=0.04           | `FALSE_WIN: PEEKING`                |
+| 03 | `srm_broken.py`                   | Сплит 10000 vs 8700                                                 | `INVALID: SRM_BROKEN`               |
+| 04 | `ratio_no_delta.py`               | revenue/orders без Delta Method                                       | `FALSE_WIN: RATIO_NO_DELTA`         |
+| 05 | `multiple_metrics_no_fdr.py`      | 8 метрик, 1 "значима"                                       | `FALSE_WIN: NO_FDR_CORRECTION`      |
+| 06 | `underpowered_lucky.py`           | N=500, MDE нужен 5%, "нашли" 12%                               | `UNRELIABLE: UNDERPOWERED`          |
+| 07 | `outlier_driven.py`               | Эффект держится на 3 китах                          | `UNRELIABLE: OUTLIER_DRIVEN`        |
+| 08 | `cuped_bad_covariate.py`          | CUPED с $\rho = 0.1$                                                  | `WARNING: WEAK_CUPED`               |
+| 09 | `mwu_for_revenue.py`              | MWU для разницы средних чеков                      | `METHODOLOGICAL_ERROR`              |
+| 10 | `clean_loss.py`                   | Чистый проигрыш, корректная статистика | `CLEAN_LOSS`                        |
+| 11 | `novelty_effect.py`               | Эффект затухает к концу теста                   | `WARNING: NOVELTY_EFFECT`           |
+| 12 | `simpsons_paradox.py`             | Общий эффект +, но в каждом сегменте –      | `WARNING: SIMPSONS_PARADOX`         |
+| 13 | `contaminated_control.py`         | Часть treatment-юзеров в control                             | `INVALID: CONTAMINATION`            |
+| 14 | `bot_traffic.py`                  | 15% ботов раздули конверсию                         | `UNRELIABLE: BOT_TRAFFIC`           |
+| 15 | `aa_false_positive.py`            | A/A тест, который "нашёл" p=0.03                         | `FALSE_WIN: AA_TEST`                |
+| 16 | `three_variants_no_correction.py` | A/B/C, лучший выбран без поправки                 | `FALSE_WIN: NO_MULTIVAR_CORRECTION` |
+| 17 | `sequential_correct.py`           | mSPRT ранняя остановка, всё ок                       | `CLEAN_WIN`                         |
+| 18 | `extreme_skew_revenue.py`         | Логнормальная выручка, нужен bootstrap          | `NEEDS_BOOTSTRAP`                   |
+| 19 | `cuped_correct_strong.py`         | CUPED с $\rho = 0.7$, работает                                | `CLEAN_WIN`                         |
+| 20 | `mixed_issues.py`                 | SRM + ratio + 3 метрики                                           | `INVALID: MULTIPLE_ISSUES`          |
 
 **Файл ожидаемых ответов:** `trap_suite/expected_verdicts.json`
 
 ---
 
 ### 📦 Задача 3.2: Интеграция Agent ↔ Tools
+
 **Срок:** 1 день
 **Исполнитель:** B
 
@@ -574,6 +601,7 @@ class ExperimentAuditAgent:
 ---
 
 ### 📦 Задача 3.3: Тест Trap Suite
+
 **Файл:** `tests/test_trap_detection.py`
 **Срок:** 1 день
 **Исполнитель:** B (с ревью от A)
@@ -600,6 +628,7 @@ def test_agent_detects_trap(trap_name, expected):
 ---
 
 ### 📦 Задача 4.1: Главный интерфейс
+
 **Файл:** `app.py`
 **Срок:** 2 дня
 **Исполнитель:** B
@@ -651,6 +680,7 @@ def test_agent_detects_trap(trap_name, expected):
 ---
 
 ### 📦 Задача 4.2: Юнит-тесты математики
+
 **Файл:** `tests/test_tools_math.py`
 **Срок:** 1 день
 **Исполнитель:** A
@@ -687,13 +717,13 @@ def test_bootstrap_ci_covers_true_effect():
 
 **Выполняется совместно.**
 
-| # | Задача | Кто | Срок |
-|:--|:---|:--:|:--:|
-| 5.1 | Написать полноценный `README.md` с архитектурой, примерами запуска и результатами Trap Suite | A+B | 1 день |
-| 5.2 | Записать GIF / скринкаст работы агента для README | B | 0.5 дня |
-| 5.3 | Деплой на Streamlit Cloud (если возможно) или инструкция по локальному запуску | B | 0.5 дня |
-| 5.4 | Code review, рефакторинг, docstrings | A+B | 1 день |
-| 5.5 | Финальный прогон всех тестов (pytest + Trap Suite) | A+B | 0.5 дня |
+| #   | Задача                                                                                                                                                | Кто |  Срок  |
+| :-- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- | :----: | :--------: |
+| 5.1 | Написать полноценный `README.md` с архитектурой, примерами запуска и результатами Trap Suite |  A+B  | 1 день |
+| 5.2 | Записать GIF / скринкаст работы агента для README                                                                           |   B   | 0.5 дня |
+| 5.3 | Деплой на Streamlit Cloud (если возможно) или инструкция по локальному запуску                          |   B   | 0.5 дня |
+| 5.4 | Code review, рефакторинг, docstrings                                                                                                             |  A+B  | 1 день |
+| 5.5 | Финальный прогон всех тестов (pytest + Trap Suite)                                                                                 |  A+B  | 0.5 дня |
 
 ---
 
@@ -701,25 +731,25 @@ def test_bootstrap_ci_covers_true_effect():
 
 ### Участник A (Stats & Data Engineer):
 
-| Спринт | Задачи | Дней |
-|:--|:---|:--:|
-| 0 | Совместная настройка | 0.5 |
-| 1 | Генератор данных + 12 статистических Tools | 3–4 |
-| 3 | 20 ловушек Trap Suite | 2–3 |
-| 4 | Юнит-тесты математики | 1 |
-| 5 | README, ревью | 1 |
-| | **Итого:** | **7.5–9.5** |
+| Спринт | Задачи                                                            |      Дней      |
+| :----------- | :---------------------------------------------------------------------- | :----------------: |
+| 0            | Совместная настройка                                 |        0.5        |
+| 1            | Генератор данных + 12 статистических Tools |        3–4        |
+| 3            | 20 ловушек Trap Suite                                            |        2–3        |
+| 4            | Юнит-тесты математики                                |         1         |
+| 5            | README, ревью                                                      |         1         |
+|              | **Итого:**                                                   | **7.5–9.5** |
 
 ### Участник B (LLM & Infra Engineer):
 
-| Спринт | Задачи | Дней |
-|:--|:---|:--:|
-| 0 | Совместная настройка, репозиторий | 0.5 |
-| 2 | DB коннекторы + Tool Registry + System Prompt + Agent Core | 3–4 |
-| 3 | Интеграция Agent↔Tools, тест Trap Suite | 2 |
-| 4 | Streamlit UI (чат + дашборд + SQL-лог) | 2–3 |
-| 5 | Деплой, GIF, ревью | 1.5 |
-| | **Итого:** | **9–11** |
+| Спринт | Задачи                                                         |    Дней    |
+| :----------- | :------------------------------------------------------------------- | :-------------: |
+| 0            | Совместная настройка, репозиторий      |       0.5       |
+| 2            | DB коннекторы + Tool Registry + System Prompt + Agent Core |      3–4      |
+| 3            | Интеграция Agent↔Tools, тест Trap Suite               |        2        |
+| 4            | Streamlit UI (чат + дашборд + SQL-лог)                  |      2–3      |
+| 5            | Деплой, GIF, ревью                                        |       1.5       |
+|              | **Итого:**                                                | **9–11** |
 
 ---
 
