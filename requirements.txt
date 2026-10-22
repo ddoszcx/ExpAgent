@@ -1,0 +1,22 @@
+
+# Статистика и данные
+numpy>=1.24.0
+scipy>=1.11.0
+statsmodels>=0.14.0
+pandas>=2.0.0
+
+# Базы данных
+duckdb>=0.9.0
+clickhouse-connect>=0.7.0
+
+# LLM и окружение
+openai>=1.30.0
+python-dotenv>=1.0.0
+
+# Интерфейс
+streamlit>=1.30.0
+plotly>=5.18.0
+
+# Тестирование и качество
+pytest>=7.4.0
+EOF

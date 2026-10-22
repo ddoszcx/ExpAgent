@@ -1,0 +1,33 @@
+# === Секреты — НИКОГДА не пушить ===
+.env
+
+# === Python кэш ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# === Виртуальное окружение ===
+.venv/
+venv/
+env/
+
+# === Установочные артефакты ===
+*.egg-info/
+dist/
+build/
+
+# === macOS ===
+.DS_Store
+
+# === IDE ===
+.idea/
+.vscode/
+
+# === Логи и временные файлы ===
+*.log
+*.tmp
+
+# === DuckDB локальная база ===
+*.duckdb
+*.duckdb.wal
