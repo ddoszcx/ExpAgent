@@ -1,10 +1,11 @@
+import json
 """Системный промпт агента ExpAgent.
 
 get_system_prompt() подставляет в шаблон:
 - схему базы (результат DuckDBClient.get_schema());
 - список реально зарегистрированных инструментов (имена из tool_registry).
 """
-import json
+
 
 SYSTEM_PROMPT_TEMPLATE = """# Роль и задача
 Ты — продуктовый аналитик и аудитор A/B-экспериментов.

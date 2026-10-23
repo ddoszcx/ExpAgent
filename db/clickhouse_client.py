@@ -33,7 +33,7 @@ class ClickHouseClient:
             f"SELECT table, name, type FROM system.columns WHERE database = '{self.database}'"
         )
         schema = {}
-        for _, row in df.iterrows():
+        for index, row in df.iterrows():
             table = row['table']
             column = row['name']
             col_type = row['type']
