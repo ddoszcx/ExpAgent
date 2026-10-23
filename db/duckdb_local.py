@@ -17,7 +17,7 @@ class DuckDBClient:
 
 
 
-    def get_schema(self) -> dict:  # получение схемы
+    def get_schema(self) -> dict:  # получение схемы 
         df = self.execute_query("SELECT table_name, column_name, data_type FROM information_schema.columns WHERE table_schema = 'main'")
 
         schema = {    }

@@ -130,6 +130,38 @@ def generate_experiment(
 
 ---
 
+### 📦 Задача 1.1b: Tool — Data Quality & Integrity Check
+**Файл:** `tools/data_quality.py`
+**Срок:** 0.5 дня
+**Исполнитель:** A
+
+```python
+def data_quality_check(
+    assignments: pd.DataFrame,
+    events: pd.DataFrame,
+    conversion_window_days: int = 7
+) -> dict:
+    """
+    Комплексная проверка гигиены данных:
+    1. Уникальные пользователи и пропуски идентификаторов.
+    2. Cross-assignments: пользователи, увидевшие одновременно оба варианта.
+    3. Window maturity: доля пользователей с незавершенным окном конверсии.
+    4. Целостность связки экспозиций с заказами.
+    
+    Returns:
+        {
+            "total_users": int,
+            "duplicate_users": int,
+            "cross_assigned_users": int,
+            "immature_users_ratio": float,
+            "has_critical_defects": bool,
+            "defects_summary": list[str]
+        }
+    """
+```
+
+---
+
 ### 📦 Задача 1.2: Tool — SRM Check
 
 **Файл:** `tools/srm.py`
