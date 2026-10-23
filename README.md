@@ -1,5 +1,4 @@
 
-cat << 'EOF' > README.md
 
 # 🔬 ExpAgent: AI Copilot for A/B Experiment Audit
 
