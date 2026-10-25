@@ -31,3 +31,6 @@ build/
 # === DuckDB локальная база ===
 *.duckdb
 *.duckdb.wal
+
+
+ExpAgent_Implementation_Plan.md
