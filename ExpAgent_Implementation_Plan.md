@@ -131,6 +131,7 @@ def generate_experiment(
 ---
 
 ### 📦 Задача 1.1b: Tool — Data Quality & Integrity Check
+
 **Файл:** `tools/data_quality.py`
 **Срок:** 0.5 дня
 **Исполнитель:** A
@@ -147,7 +148,7 @@ def data_quality_check(
     2. Cross-assignments: пользователи, увидевшие одновременно оба варианта.
     3. Window maturity: доля пользователей с незавершенным окном конверсии.
     4. Целостность связки экспозиций с заказами.
-    
+  
     Returns:
         {
             "total_users": int,
