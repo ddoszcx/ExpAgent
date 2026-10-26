@@ -44,6 +44,8 @@ class  ExperimentAuditAgent:
             messages = messages, 
             tools = TOOL_DEFINITIONS)
             response = completion.choices[0].message
+
+            
             if response.tool_calls:
                 messages.append(response)
 
@@ -54,11 +56,17 @@ class  ExperimentAuditAgent:
                         executed_sql.append({str(y.id): arguments})
                     result = json.dumps(execute_tool(name, arguments, self.db_client), ensure_ascii=False)
                     messages.append({'role': 'tool', 'tool_call_id': y.id, 'content': result})
-                    tool_calls_trace.append({"tools_name": name, "arguments":arguments})
+                    tool_calls_trace.append({"tool_name": name, "arguments":arguments})
             else:
                 break 
+
+
+
+            
+
         return {"experiment_name": experiment_name,
-                "report_markdown": response.content,
+                "report_markdown": response.content  or f" Превышен лимит шагов ({self.max_iterations}). Агент не успел завершить аудит.",
                 "executed_sql": executed_sql,
                 "tool_calls_trace": tool_calls_trace,
                 }
+
