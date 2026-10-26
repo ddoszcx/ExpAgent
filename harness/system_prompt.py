@@ -152,7 +152,7 @@ def get_system_prompt(schema: dict | None = None, tool_names: list[str] | None =
     )
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # проба 
     demo_schema = {
         "assignments": {"user_id": "VARCHAR", "variant": "VARCHAR", "exposed_at": "TIMESTAMP"},
         "events": {"user_id": "VARCHAR", "revenue": "DOUBLE", "event_time": "TIMESTAMP"}
