@@ -61,12 +61,11 @@ class  ExperimentAuditAgent:
                 break 
 
 
-
-            
-
         return {"experiment_name": experiment_name,
                 "report_markdown": response.content  or f" Превышен лимит шагов ({self.max_iterations}). Агент не успел завершить аудит.",
                 "executed_sql": executed_sql,
                 "tool_calls_trace": tool_calls_trace,
                 }
 
+
+    

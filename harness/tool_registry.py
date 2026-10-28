@@ -368,7 +368,7 @@ def execute_tool(name: str, arguments: dict, db_client = None) -> dict:
             df = db_client.execute_query(sql_text)
             return {'rows': df.to_dict(orient = 'records')}
 
-        elif name ==  'srm_check':
+        elif name ==  'srm_check':   # split 
             n_cont = arguments['n_control'] #количество конроль группы
             n_treat = arguments['n_treatment'] #количество тестовой
             exp_ratio = arguments.get('expected_ratio', 0.5)
