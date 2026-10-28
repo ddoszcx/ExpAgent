@@ -1,4 +1,4 @@
-# ExpAgent: AI Copilot for A/B Experiment Audit(В процессе разработки)
+# ExpAgent: AI agent for A/B Experiment Audit(В процессе разработки)
 
 ExpAgent — автономный агент для ретроспективного аудита и математической валидации программы A/B-тестирования.
 
