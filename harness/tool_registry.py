@@ -1,4 +1,5 @@
-from scipy.stats import alpha
+from tools.srm import srm_check
+
 TOOL_DEFINITIONS = [
     # 1. работа с базой данных
     {
@@ -368,21 +369,12 @@ def execute_tool(name: str, arguments: dict, db_client = None) -> dict:
             df = db_client.execute_query(sql_text)
             return {'rows': df.to_dict(orient = 'records')}
 
-        elif name ==  'srm_check':   # split 
-            n_cont = arguments['n_control'] #количество конроль группы
-            n_treat = arguments['n_treatment'] #количество тестовой
-            exp_ratio = arguments.get('expected_ratio', 0.5)
-            from scipy import stats
-            import numpy as np
-            chi2_stat, p_value = stats.chisquare(f_obs= [n_cont, n_treat], f_exp = [(n_cont + n_treat) * exp_ratio, (n_cont + n_treat) * (1-exp_ratio)])
-            check = p_value < 0.001
-            return {
-                'test':  "chi_square_goodness_of_fit", 
-                 "chi2_statistic": round(chi2_stat, 4),
-                "p_value": p_value,
-                "is_srm": check,
-                'verdict': "SRM_BROKEN" if check else 'SRM_OK'
-            }
+        elif name == "srm_check":
+            return srm_check(
+                arguments["n_control"],
+                arguments["n_treatment"],
+                arguments.get("expected_ratio", 0.5),
+            )
 
         else:
             # Для всех инструментов что ты допишешь потом в  tools/
